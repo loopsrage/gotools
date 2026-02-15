@@ -1,0 +1,8 @@
+
+FeatureExample:
+  Enabled: false
+  OtherAttribute: {}
+
+Feature2Example:
+  Enabled: false
+  OtherAttribute: {}
