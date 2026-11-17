@@ -17,16 +17,32 @@ type Config struct {
 	SemaphorePool chan struct{}
 }
 
-func (c *Config) Acquire(ctx context.Context) {
+// Acquire takes a semaphore slot. It returns false when the context is done
+// before a slot could be taken (no slot is held, so Release must not be called).
+// A nil SemaphorePool means unlimited concurrency and always succeeds.
+func (c *Config) Acquire(ctx context.Context) bool {
+	if c.SemaphorePool == nil {
+		return true
+	}
+	// Fast path: never take a slot when the context is already done.
 	select {
 	case <-ctx.Done():
-		return
+		return false
+	default:
+	}
+	select {
+	case <-ctx.Done():
+		return false
 	case c.SemaphorePool <- struct{}{}:
 		// Acquired the slot
+		return true
 	}
 }
 
 func (c *Config) Release() {
+	if c.SemaphorePool == nil {
+		return
+	}
 	<-c.SemaphorePool
 }
 

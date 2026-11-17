@@ -33,10 +33,17 @@ func (o *ValueSearcher) Current(cnt *container.Container) {
 		if o.results == nil {
 			o.results = make(map[interface{}]interface{})
 		}
-
+		path := cnt.Path()
+		if len(path) < 6 {
+			// Root container or short path: use keys directly
+			for key, value := range v {
+				o.results[key] = value
+			}
+			return
+		}
+		delim := string([]byte(path)[4])
 		for key, value := range v {
-			delim := string([]byte(cnt.Path())[4])
-			o.results[strings.TrimPrefix(cnt.Path()[6:], delim)+delim+key] = value
+			o.results[strings.TrimPrefix(path[5:], delim)+delim+key] = value
 		}
 	}
 }

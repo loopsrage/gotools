@@ -109,7 +109,15 @@ func LoadAppSettingInt64(appName, setting string) int64 {
 }
 
 func LoadAppSetting(appName, setting string) interface{} {
-	return LoadAppSettings(appName)[appName].(map[string]interface{})[setting]
+	appSettings := LoadAppSettings(appName)
+	if appSettings == nil {
+		return nil
+	}
+	appMap, ok := appSettings[appName].(map[string]interface{})
+	if !ok {
+		return nil
+	}
+	return appMap[setting]
 }
 
 func JsonUnmarshalSettingsTo(appName string, appConfig interface{}) error {

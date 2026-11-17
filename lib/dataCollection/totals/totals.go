@@ -10,15 +10,8 @@ type Totals struct {
 }
 
 func (o *Totals) total(prefix string) *int64 {
-	x, _ := o.totals.Load(prefix)
-	switch x := x.(type) {
-	case *int64:
-		return x
-	default:
-		y := new(int64)
-		o.totals.Store(prefix, y)
-		return y
-	}
+	x, _ := o.totals.LoadOrStore(prefix, new(int64))
+	return x.(*int64)
 }
 
 func (o *Totals) AddTotal(prefix string, add int64) {

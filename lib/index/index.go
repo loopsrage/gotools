@@ -37,11 +37,9 @@ func (i *Index) StoreInIndex(indexName string, key, value interface{}) *Index {
 }
 
 func (i *Index) LoadOrStoreInIndex(indexName string, key, value interface{}) (actual interface{}, loaded bool) {
-	idx := i.LoadIndex(indexName)
-	if idx == nil {
-		i.New(indexName)
-	}
-	idx = i.LoadIndex(indexName)
+	// Atomically get-or-create the sub-map to avoid a check-then-act race.
+	m, _ := i.Map.LoadOrStore(indexName, &sync.Map{})
+	idx := m.(*sync.Map)
 	return idx.LoadOrStore(key, value)
 }
 

@@ -11,7 +11,7 @@ func BuildContainerTree(current *container.Container, path []string, pathDelim b
 		if len(start) == 0 {
 			start = []interface{}{map[string]interface{}{}}
 		}
-		current = container.NewContainer(nil, "", start)
+		current = container.NewContainer(nil, "", start[0])
 		path = []string{"root"}
 	}
 

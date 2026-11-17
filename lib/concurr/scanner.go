@@ -35,6 +35,7 @@ func (s *Scanner) Add(data interface{}) {
 	ci := atomic.LoadInt64(&s.index)
 	s.data.Store(ci, data)
 	atomic.AddInt64(&s.index, 1)
+	atomic.AddInt64(&s.count, 1)
 }
 
 func (s *Scanner) At(position int64) interface{} {
@@ -45,5 +46,6 @@ func (s *Scanner) At(position int64) interface{} {
 func (s *Scanner) Reset() {
 	atomic.StoreInt64(&s.index, 0)
 	atomic.StoreInt64(&s.position, 0)
+	atomic.StoreInt64(&s.count, 0)
 	s.data = &sync.Map{}
 }

@@ -15,7 +15,7 @@ type Action interface {
 
 func rndDur(x int64) time.Duration {
 	x = int64(math.Max(float64(x), float64(1)))
-	return time.Duration(rand.Int64N(x))
+	return time.Duration(rand.Int64N(x)) * time.Millisecond
 }
 
 // ActionOn performs action.Action(on) for each instance provided
@@ -37,17 +37,22 @@ func runAction(ctx context.Context, wg *sync.WaitGroup, config *Config, action A
 		return
 	}
 
-	// Acquire a semaphore slot (this will block if maxInFlight is reached)
-	config.Acquire(ctx)
-
+	// Acquire a semaphore slot. If the context is done no slot is taken and
+	// Release must not be called.
+	if !config.Acquire(ctx) {
+		return
+	}
 	if ctx.Err() != nil {
+		config.Release()
 		return
 	}
 
-	// Sleep for stagger time
+	// Sleep for stagger time (holds the slot while dispatching).
 	time.Sleep(rndDur(config.StaggerMs()))
 
-	wg.Go(func() {
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
 		defer config.Release()
 		select {
 		case <-ctx.Done():
@@ -56,5 +61,5 @@ func runAction(ctx context.Context, wg *sync.WaitGroup, config *Config, action A
 		default:
 			action.Action(on)
 		}
-	})
+	}()
 }

@@ -30,8 +30,8 @@ func (t *TsList) Add(x ...interface{}) int64 {
 }
 
 func (t *TsList) Set(position int64, value interface{}) {
-	t.mu.RLock()
-	defer t.mu.RUnlock()
+	t.mu.Lock()
+	defer t.mu.Unlock()
 	if position >= 0 && position < int64(len(t.data)) {
 		t.data[position] = value
 	}

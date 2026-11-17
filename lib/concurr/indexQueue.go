@@ -17,8 +17,10 @@ type BatchActionQueue struct {
 }
 
 func (iq *BatchActionQueue) Add(key, value interface{}) {
-	atomic.AddInt64(&iq.size, 1)
-	iq.index.StoreInIndex("Queue", key, value)
+	_, loaded := iq.index.LoadOrStoreInIndex("Queue", key, value)
+	if !loaded {
+		atomic.AddInt64(&iq.size, 1)
+	}
 }
 
 func (iq *BatchActionQueue) BatchAction() {
@@ -45,7 +47,6 @@ func (iq *BatchActionQueue) BatchAction() {
 			batch = nil
 		}
 	}
-	ActionOn(iq.Ctx, iq.Config, iq.Action, batch...)
 }
 
 func (iq *BatchActionQueue) SetBatchSize(size int64) *BatchActionQueue {

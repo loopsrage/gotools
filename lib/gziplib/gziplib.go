@@ -7,7 +7,7 @@ import (
 )
 
 func IsGzip(buffer []byte) bool {
-	if buffer == nil {
+	if buffer == nil || len(buffer) < 2 {
 		return false
 	}
 	return buffer[0] == 0x1F && buffer[1] == 0x8B

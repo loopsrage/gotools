@@ -13,7 +13,7 @@ func ActionQueue(ctx context.Context, wg *sync.WaitGroup, config *Config, action
 				return
 			case c, ok := <-queueChan:
 				if !ok {
-					continue
+					return
 				}
 				runAction(ctx, wg, config, action, c)
 			}

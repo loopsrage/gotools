@@ -2,10 +2,7 @@ package catchPanic
 
 func CatchPanic(f func(), cb func(interface{})) {
 	defer func() {
-		switch err := recover().(type) {
-		case error:
-			cb(err)
-		default:
+		if err := recover(); err != nil {
 			cb(err)
 		}
 	}()
