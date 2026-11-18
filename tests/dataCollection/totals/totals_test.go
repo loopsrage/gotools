@@ -4,7 +4,7 @@ import (
 	"sync"
 	"testing"
 
-	"golangApp/lib/dataCollection/totals"
+	"github.com/loopsrage/gotools/lib/dataCollection/totals"
 )
 
 func TestTotalsAddAndTotal(t *testing.T) {

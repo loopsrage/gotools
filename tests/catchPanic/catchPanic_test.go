@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-import "golangApp/lib/catchPanic"
+import "github.com/loopsrage/gotools/lib/catchPanic"
 
 func TestCatchPanicNormalExecution(t *testing.T) {
 	var called bool

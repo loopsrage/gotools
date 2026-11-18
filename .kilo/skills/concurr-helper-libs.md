@@ -8,14 +8,14 @@ This skill documents how to use the shared Go helper libraries that underpin `go
 
 ## concurr — semaphore-limited concurrency & thread-safe collections
 
-Package path: `lib/concurr` (module `golangApp`)
+Package path: `lib/concurr` (module `github.com/loopsrage/gotools`)
 
 ### Purpose
 Run work concurrently with a bounded number of in-flight goroutines (semaphore), plus thread-safe `Scanner`, `TsList`, and `ActionQueue` data structures. All hot loops in `go_mltools` neural components use `concurr` to parallelize per-element, per-row, per-head, per-timestep, and per-batch work.
 
 ### Config
 ```go
-import "golangApp/lib/concurr"
+import "github.com/loopsrage/gotools/lib/concurr"
 
 // NewConfig(maxInFlight) creates a semaphore-limited config.
 cfg := concurr.NewConfig(8) // at most 8 goroutines in flight
@@ -90,7 +90,7 @@ Package path: `lib/index`
 Named sub-indexes backed by `sync.Map` for reduced lock contention. Used in `go_mltools` to replace hand-rolled mutex maps in `shared_index`, `metrics_index`, and `corpus_sweep`.
 
 ```go
-import "golangApp/lib/index"
+import "github.com/loopsrage/gotools/lib/index"
 
 idx := index.NewIndex()
 
@@ -126,7 +126,7 @@ Package path: `lib/onceler`
 Ensure a function runs only once per `(index, key)` pair. Built on top of `index.Index`.
 
 ```go
-import "golangApp/lib/onceler"
+import "github.com/loopsrage/gotools/lib/onceler"
 
 o := onceler.NewOnceler()
 
@@ -148,7 +148,7 @@ Package path: `lib/toggle`
 Atomic boolean switch with `Set`, `Toggle`, and `Load`.
 
 ```go
-import "golangApp/lib/toggle"
+import "github.com/loopsrage/gotools/lib/toggle"
 
 t := toggle.NewToggle(false)
 t.Set(true)
@@ -166,7 +166,7 @@ Package path: `lib/timelib`
 Iterate time windows from start→end or end→start.
 
 ```go
-import "golangApp/lib/timelib"
+import "github.com/loopsrage/gotools/lib/timelib"
 
 type myTarget struct{}
 func (m *myTarget) Window(t time.Time) { fmt.Println(t) }
@@ -189,8 +189,8 @@ Wraps `time.Ticker` with interval-based reset and signal-driven cleanup (via `cl
 
 ```go
 import (
-    "golangApp/lib/clsr"
-    "golangApp/lib/controller"
+    "github.com/loopsrage/gotools/lib/clsr"
+    "github.com/loopsrage/gotools/lib/controller"
     "time"
 )
 
@@ -212,7 +212,7 @@ Package path: `lib/catchPanic`
 Recover from a panic in `f` and pass the recovered value to `cb`.
 
 ```go
-import "golangApp/lib/catchPanic"
+import "github.com/loopsrage/gotools/lib/catchPanic"
 
 catchPanic.CatchPanic(func() {
     // might panic
@@ -231,7 +231,7 @@ Package path: `lib/clsr`
 Listen for OS signals (SIGTERM, SIGINT) and run cleanup closers once.
 
 ```go
-import "golangApp/lib/clsr"
+import "github.com/loopsrage/gotools/lib/clsr"
 
 cc := clsr.NewCleanupComplete(cancelFunc, waitGroup)
 clsr.SigClosure(nil, cc, closer1, closer2)
@@ -249,7 +249,7 @@ Package path: `lib/gziplib`
 Gzip compress/decompress buffers with auto-detection.
 
 ```go
-import "golangApp/lib/gziplib"
+import "github.com/loopsrage/gotools/lib/gziplib"
 
 gziplib.IsGzip(buffer)                      // true if gzip magic bytes
 buf, err := gziplib.EnsureGunzip(buffer)    // decompress if gzipped
@@ -279,4 +279,4 @@ go test ./...       # all tests pass
 go test -race ./... # race-clean
 ```
 
-**Module note:** `go_mltools` imports these as `go_mltools/lib/<pkg>`; `gotools` imports them as `golangApp/lib/<pkg>`.
+**Module note:** `go_mltools` imports these as `go_mltools/lib/<pkg>`; `gotools` imports them as `github.com/loopsrage/gotools/lib/<pkg>`.

@@ -2,7 +2,7 @@ package queueController
 
 import (
 	"context"
-	"golangApp/lib/concurr"
+	"github.com/loopsrage/gotools/lib/concurr"
 )
 
 func QueueDataBackgroundQueue(ctx context.Context, queueData *[]*QueueData, to *QueueController) {

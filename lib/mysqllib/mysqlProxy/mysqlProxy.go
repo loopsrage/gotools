@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"golangApp/lib/clsr"
+	"github.com/loopsrage/gotools/lib/clsr"
 	"io"
 	"log"
 	"net"

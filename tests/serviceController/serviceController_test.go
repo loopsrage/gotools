@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"golangApp/lib/serviceController"
+	"github.com/loopsrage/gotools/lib/serviceController"
 )
 
 type mockController struct {

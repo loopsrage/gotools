@@ -6,7 +6,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"golangApp/lib/onceler"
+	"github.com/loopsrage/gotools/lib/onceler"
 )
 
 func TestOncelerStoreOnceExecutesOnce(t *testing.T) {

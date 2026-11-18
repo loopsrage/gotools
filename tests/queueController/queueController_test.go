@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"golangApp/lib/concurr"
-	"golangApp/lib/queueController"
+	"github.com/loopsrage/gotools/lib/concurr"
+	"github.com/loopsrage/gotools/lib/queueController"
 )
 
 type testAction struct {
@@ -278,4 +278,28 @@ func TestQueueActionWrapperUnexpectedTypePanics(t *testing.T) {
 	}()
 	wrapper.Action("not a queue data")
 	cancel()
+}
+
+func TestQueueDataDerivativeAndReadAttributes(t *testing.T) {
+	type SampleArgs struct {
+		Page int
+		Name string
+	}
+
+	qd := queueController.NewQueueData()
+	qd.SetAttributes(map[string]interface{}{
+		"Page": float64(3),
+		"Name": "page-3",
+	})
+
+	der := qd.CopyDerivative("0").(*queueController.QueueData)
+	if got := der.Derivative(); got != "0" {
+		t.Fatalf("Derivative() = %q, want %q", got, "0")
+	}
+
+	args := &SampleArgs{}
+	der.ReadAttributes(args)
+	if args.Page != 3 || args.Name != "page-3" {
+		t.Fatalf("ReadAttributes() = %+v, want Page=3 Name=page-3", args)
+	}
 }

@@ -1,7 +1,7 @@
 package containerTreeBuilder
 
 import (
-	"golangApp/lib/jsonContainers/container"
+	"github.com/loopsrage/gotools/lib/jsonContainers/container"
 	"strconv"
 	"strings"
 )

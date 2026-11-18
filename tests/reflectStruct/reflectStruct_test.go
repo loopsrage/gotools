@@ -3,7 +3,7 @@ package reflectStruct_test
 import (
 	"testing"
 
-	"golangApp/lib/reflectStruct"
+	"github.com/loopsrage/gotools/lib/reflectStruct"
 )
 
 func TestMarshallMapFlat(t *testing.T) {
@@ -91,5 +91,35 @@ func TestFindFieldsNonStruct(t *testing.T) {
 	err := reflectStruct.FindFields(&x, nil)
 	if err == nil {
 		t.Fatal("expected error for non-struct appConfig")
+	}
+}
+
+func TestMapAndCopyStruct(t *testing.T) {
+	type Src struct {
+		Addr           string `json:"Addr"`
+		MaxHeaderBytes int    `json:"MaxHeaderBytes"`
+		Enabled        bool   `json:"Enabled"`
+	}
+	type Dst struct {
+		Addr           string `json:"Addr"`
+		MaxHeaderBytes int    `json:"MaxHeaderBytes"`
+		Enabled        bool   `json:"Enabled"`
+	}
+
+	src := &Src{Addr: "0.0.0.0:8081", MaxHeaderBytes: 1048576, Enabled: true}
+	m, err := reflectStruct.Map(src)
+	if err != nil {
+		t.Fatalf("Map() error: %v", err)
+	}
+	if m["Addr"] != "0.0.0.0:8081" {
+		t.Fatalf("m['Addr'] = %v, want 0.0.0.0:8081", m["Addr"])
+	}
+
+	dst := &Dst{}
+	if err := reflectStruct.CopyStruct(src, dst); err != nil {
+		t.Fatalf("CopyStruct() error: %v", err)
+	}
+	if dst.Addr != src.Addr || dst.MaxHeaderBytes != src.MaxHeaderBytes || dst.Enabled != src.Enabled {
+		t.Fatalf("CopyStruct() mismatch: got %+v, want %+v", dst, src)
 	}
 }

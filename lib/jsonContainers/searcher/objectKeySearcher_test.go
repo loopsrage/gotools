@@ -3,8 +3,8 @@ package searcher
 import (
 	"encoding/json"
 	"fmt"
-	"golangApp/lib/jsonContainers/container"
-	"golangApp/lib/jsonContainers/containerTreeBuilder"
+	"github.com/loopsrage/gotools/lib/jsonContainers/container"
+	"github.com/loopsrage/gotools/lib/jsonContainers/containerTreeBuilder"
 	"os"
 	"testing"
 )

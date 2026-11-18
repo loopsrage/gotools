@@ -3,7 +3,7 @@ package container_test
 import (
 	"testing"
 
-	"golangApp/lib/jsonContainers/container"
+	"github.com/loopsrage/gotools/lib/jsonContainers/container"
 )
 
 func TestNewContainerRoot(t *testing.T) {

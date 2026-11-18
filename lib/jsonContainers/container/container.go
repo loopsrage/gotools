@@ -2,8 +2,8 @@ package container
 
 import (
 	"errors"
-	"golangApp/lib/concurr"
-	"golangApp/lib/index"
+	"github.com/loopsrage/gotools/lib/concurr"
+	"github.com/loopsrage/gotools/lib/index"
 	"sync/atomic"
 )
 

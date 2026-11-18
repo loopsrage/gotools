@@ -2,7 +2,7 @@ package onceler
 
 import (
 	"errors"
-	"golangApp/lib/index"
+	"github.com/loopsrage/gotools/lib/index"
 	"sync"
 )
 

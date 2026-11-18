@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"golangApp/lib/gziplib"
+	"github.com/loopsrage/gotools/lib/gziplib"
 )
 
 func TestIsGzipNil(t *testing.T) {

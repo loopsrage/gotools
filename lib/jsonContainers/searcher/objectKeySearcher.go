@@ -1,7 +1,7 @@
 package searcher
 
 import (
-	"golangApp/lib/jsonContainers/container"
+	"github.com/loopsrage/gotools/lib/jsonContainers/container"
 	"strings"
 )
 

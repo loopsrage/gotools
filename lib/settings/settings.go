@@ -5,11 +5,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"golangApp/lib/index"
-	"golangApp/lib/jsonContainers/container"
-	"golangApp/lib/jsonContainers/containerTreeBuilder"
-	"golangApp/lib/jsonContainers/searcher"
-	"golangApp/lib/reflectStruct"
+	"github.com/loopsrage/gotools/lib/index"
+	"github.com/loopsrage/gotools/lib/jsonContainers/container"
+	"github.com/loopsrage/gotools/lib/jsonContainers/containerTreeBuilder"
+	"github.com/loopsrage/gotools/lib/jsonContainers/searcher"
+	"github.com/loopsrage/gotools/lib/reflectStruct"
 	"io"
 	"os"
 	"regexp"
@@ -264,6 +264,16 @@ func init() {
 		err := RestoreFromFile(ef)
 		if err != nil {
 			panic(err)
+		}
+		return
+	}
+
+	if dir, err := os.Getwd(); err == nil {
+		defaultEnv := dir + "/env.yaml"
+		if _, statErr := os.Stat(defaultEnv); statErr == nil {
+			if err := RestoreFromFile(defaultEnv); err != nil {
+				panic(err)
+			}
 		}
 	}
 }

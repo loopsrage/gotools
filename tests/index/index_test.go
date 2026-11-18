@@ -3,7 +3,7 @@ package index_test
 import (
 	"testing"
 
-	"golangApp/lib/index"
+	"github.com/loopsrage/gotools/lib/index"
 )
 
 func TestNewIndex(t *testing.T) {

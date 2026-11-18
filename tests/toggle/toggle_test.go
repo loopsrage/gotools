@@ -4,7 +4,7 @@ import (
 	"sync"
 	"testing"
 
-	"golangApp/lib/toggle"
+	"github.com/loopsrage/gotools/lib/toggle"
 )
 
 func TestToggleNewInitial(t *testing.T) {

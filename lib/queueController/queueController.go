@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"golangApp/lib/concurr"
+	"github.com/loopsrage/gotools/lib/concurr"
 	"sync"
 	"time"
 )
@@ -47,12 +47,16 @@ func (q *QueueController) SetNext(queueController *QueueController) {
 	defer q.Unlock()
 
 	q.nextQueue = queueController.queue
-	queueController.prevQueue = q.nextQueue
+	queueController.prevQueue = q.queue
 }
 
 func (q *QueueController) SendSelf(on interface{}) {
 	q.wg2.Add(1)
 	q.queue <- on
+}
+
+func (q *QueueController) Done() {
+	q.wg2.Done()
 }
 
 func (q *QueueController) SendNext(on interface{}) {
@@ -64,7 +68,7 @@ func (q *QueueController) SendNext(on interface{}) {
 		q.wg2.Done()
 		return
 	}
-	q.nextQueue <- on
+	nextQ <- on
 }
 
 func (q *QueueController) SetBroadcast(to map[string]*QueueController) {
@@ -74,15 +78,15 @@ func (q *QueueController) SetBroadcast(to map[string]*QueueController) {
 	q.broadCast = to
 }
 
-func (q *QueueController) Broadcast(x *QueueData) {
+func (q *QueueController) Broadcast(x QueueD) {
 	q.RLock()
 	for dr, qc := range q.broadCast {
-		go func(der string, to *QueueController, y *QueueData) {
+		go func(der string, to *QueueController, y QueueD) {
 			err := q.CheckContext()
 			if err != nil {
 				return
 			}
-			to.SendSelf(y)
+			to.SendSelf(y.CopyDerivative(der))
 		}(dr, qc, x)
 	}
 	q.RUnlock()

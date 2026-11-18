@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"testing"
 
-	"golangApp/lib/jsonIndexer"
+	"github.com/loopsrage/gotools/lib/jsonIndexer"
 )
 
 func TestNewJsonIndexer(t *testing.T) {

@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"golangApp/lib/concurr"
+	"github.com/loopsrage/gotools/lib/concurr"
 )
 
 // ---------------- Config tests ----------------

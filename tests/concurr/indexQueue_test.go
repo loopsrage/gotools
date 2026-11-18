@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"golangApp/lib/concurr"
-	"golangApp/lib/index"
+	"github.com/loopsrage/gotools/lib/concurr"
+	"github.com/loopsrage/gotools/lib/index"
 )
 
 // ---------------- BatchActionQueue tests ----------------

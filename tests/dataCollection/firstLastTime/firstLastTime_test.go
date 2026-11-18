@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"golangApp/lib/dataCollection/firstLastTime"
+	"github.com/loopsrage/gotools/lib/dataCollection/firstLastTime"
 )
 
 func TestFirstLastSetFirstTime(t *testing.T) {

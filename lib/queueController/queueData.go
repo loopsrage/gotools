@@ -1,16 +1,89 @@
 package queueController
 
 import (
-	"golangApp/lib/concurr"
-	"golangApp/lib/index"
+	"github.com/loopsrage/gotools/lib/concurr"
+	"github.com/loopsrage/gotools/lib/index"
+	"reflect"
+	"sync/atomic"
 )
+
+type QueueD interface {
+	Derivative() string
+	CopyDerivative(derivative string) QueueD
+}
 
 type QueueData struct {
 	*index.Index
-	trace *concurr.TsList
+	Data       *index.Index
+	Derivitive *atomic.Value
+	trace      *concurr.TsList
 }
 
 const attributes = "attributes"
+
+func (c *QueueData) Derivative() string {
+	if c.Derivitive == nil {
+		return ""
+	}
+
+	switch d := c.Derivitive.Load().(type) {
+	case string:
+		return d
+	default:
+		return ""
+	}
+}
+
+func (c *QueueData) CopyDerivative(derivative string) QueueD {
+	der := &atomic.Value{}
+	der.Store(derivative)
+
+	return &QueueData{
+		Index:      c.Index,
+		Data:       c.Data,
+		Derivitive: der,
+		trace:      c.trace,
+	}
+}
+
+func (c *QueueData) ReadAttributes(to interface{}) {
+	if to == nil || c.Index == nil {
+		return
+	}
+
+	wt := reflect.TypeOf(to)
+	if wt.Kind() == reflect.Ptr {
+		wt = wt.Elem()
+	}
+
+	wv := reflect.ValueOf(to)
+	if wv.Kind() == reflect.Ptr {
+		wv = wv.Elem()
+	}
+
+	if wt.Kind() == reflect.Struct {
+		fieldCount := wt.NumField()
+		for i := 0; i < fieldCount; i++ {
+			field := wv.Field(i)
+			if !wt.Field(i).IsExported() {
+				continue
+			}
+
+			if field.CanSet() {
+				val := c.Attribute(wt.Field(i).Name)
+				if val == nil {
+					continue
+				}
+
+				vx := reflect.ValueOf(val)
+				if !vx.CanConvert(field.Type()) {
+					continue
+				}
+				field.Set(vx.Convert(field.Type()))
+			}
+		}
+	}
+}
 
 func (c *QueueData) Setting(appName, path string) (interface{}, error) {
 	return c.LoadFromIndex(appName, path)
@@ -91,16 +164,20 @@ func (c *QueueData) Attributes() map[string]interface{} {
 }
 
 func (c *QueueData) NewQueueData() *QueueData {
+	idx := index.NewIndex()
 	nd := &QueueData{
-		Index: index.NewIndex(),
+		Index: idx,
+		Data:  idx,
 		trace: c.trace,
 	}
 	return nd
 }
 
 func NewQueueData() *QueueData {
+	idx := index.NewIndex()
 	return &QueueData{
-		Index: index.NewIndex(),
+		Index: idx,
+		Data:  idx,
 		trace: concurr.NewTsList(),
 	}
 }

@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"golangApp/lib/concurr"
+	"github.com/loopsrage/gotools/lib/concurr"
 )
 
 // counterAction records invocation count, peak concurrent executions, and items seen.

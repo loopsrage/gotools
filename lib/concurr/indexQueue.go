@@ -2,7 +2,7 @@ package concurr
 
 import (
 	"context"
-	"golangApp/lib/index"
+	"github.com/loopsrage/gotools/lib/index"
 	"sync/atomic"
 )
 

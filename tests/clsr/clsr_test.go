@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"golangApp/lib/clsr"
+	"github.com/loopsrage/gotools/lib/clsr"
 )
 
 func TestNewCleanupComplete(t *testing.T) {

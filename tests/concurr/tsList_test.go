@@ -4,7 +4,7 @@ import (
 	"sync"
 	"testing"
 
-	"golangApp/lib/concurr"
+	"github.com/loopsrage/gotools/lib/concurr"
 )
 
 // ---------------- TsList tests ----------------

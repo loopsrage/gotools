@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"golangApp/lib/concurr"
+	"github.com/loopsrage/gotools/lib/concurr"
 )
 
 // sinkAction records items passed to Action in order.

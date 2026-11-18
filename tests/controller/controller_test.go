@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"golangApp/lib/clsr"
-	"golangApp/lib/controller"
+	"github.com/loopsrage/gotools/lib/clsr"
+	"github.com/loopsrage/gotools/lib/controller"
 )
 
 func TestNewController(t *testing.T) {

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"golangApp/lib/timelib"
+	"github.com/loopsrage/gotools/lib/timelib"
 )
 
 type mockTargetTime struct {

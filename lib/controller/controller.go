@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"golangApp/lib/clsr"
+	"github.com/loopsrage/gotools/lib/clsr"
 	"sync/atomic"
 	"time"
 )

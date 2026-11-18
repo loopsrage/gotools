@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"golangApp/lib/reflectTags"
+	"github.com/loopsrage/gotools/lib/reflectTags"
 )
 
 type testStruct struct {

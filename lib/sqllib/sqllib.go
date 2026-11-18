@@ -6,7 +6,7 @@ import (
 	"database/sql/driver"
 	"errors"
 	"fmt"
-	"golangApp/lib/reflectTags"
+	"github.com/loopsrage/gotools/lib/reflectTags"
 	"reflect"
 	"strings"
 	"time"

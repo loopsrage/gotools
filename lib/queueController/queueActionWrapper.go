@@ -3,7 +3,7 @@ package queueController
 import (
 	"context"
 	"fmt"
-	"golangApp/lib/toggle"
+	"github.com/loopsrage/gotools/lib/toggle"
 	"sync"
 )
 

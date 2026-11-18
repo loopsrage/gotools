@@ -5,7 +5,7 @@ import (
 	"database/sql/driver"
 	"testing"
 
-	"golangApp/lib/sqllib"
+	"github.com/loopsrage/gotools/lib/sqllib"
 )
 
 func TestSqlNullValString(t *testing.T) {

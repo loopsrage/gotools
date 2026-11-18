@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"golangApp/lib/quickTimeFormats"
+	"github.com/loopsrage/gotools/lib/quickTimeFormats"
 )
 
 func TestTimeFormatsNonEmpty(t *testing.T) {

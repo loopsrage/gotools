@@ -4,9 +4,9 @@ import (
 	"strings"
 	"testing"
 
-	"golangApp/lib/jsonContainers/container"
-	"golangApp/lib/jsonContainers/containerTreeBuilder"
-	"golangApp/lib/jsonContainers/searcher"
+	"github.com/loopsrage/gotools/lib/jsonContainers/container"
+	"github.com/loopsrage/gotools/lib/jsonContainers/containerTreeBuilder"
+	"github.com/loopsrage/gotools/lib/jsonContainers/searcher"
 )
 
 func buildTestContainer() *container.Container {

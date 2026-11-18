@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"golangApp/lib/settings"
+	"github.com/loopsrage/gotools/lib/settings"
 )
 
 func TestAddAndLoadAppSettings(t *testing.T) {

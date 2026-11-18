@@ -2,7 +2,7 @@ package ollamalib
 
 import (
 	"context"
-	"golangApp/lib/concurr"
+	"github.com/loopsrage/gotools/lib/concurr"
 	"strings"
 	"sync"
 
