@@ -1,6 +1,6 @@
 module github.com/loopsrage/gotools
 
-go 1.26.10
+go 1.27
 
 require (
 	cloud.google.com/go/aiplatform v1.127.1
@@ -20,6 +20,7 @@ require (
 	github.com/go-sql-driver/mysql v1.10.1
 	github.com/jackc/pgx/v5 v5.13.0
 	github.com/klippa-app/go-pdfium v1.21.5
+	github.com/loopsrage/go_mltools v0.0.0-20261118234952-366c93ed539c
 	github.com/microsoft/go-mssqldb v1.12.0
 	github.com/ollama/ollama v0.40.16
 	github.com/openai/openai-go/v3 v3.2.0
@@ -105,6 +106,7 @@ require (
 	github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/spiffe/go-spiffe/v2 v2.8.1 // indirect
+	github.com/tetratelabs/wazero v1.12.0 // indirect
 	github.com/tidwall/gjson v1.18.0 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
