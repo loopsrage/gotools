@@ -23,7 +23,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.13.0
 	github.com/klippa-app/go-pdfium v1.21.5
-	github.com/loopsrage/go_mltools v0.0.0-20261119044605-9761efa5994c
+	github.com/loopsrage/go_mltools v0.0.0-20261119222231-be29c4924c46
 	github.com/microsoft/go-mssqldb v1.12.0
 	github.com/ollama/ollama v0.40.16
 	github.com/openai/openai-go/v3 v3.2.0
@@ -78,6 +78,7 @@ require (
 	github.com/envoyproxy/protoc-gen-validate v1.3.3 // indirect
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/felixge/httpsnoop v1.1.0 // indirect
+	github.com/go-gl/gl v0.0.0-20260331235117-4566fea9a276 // indirect
 	github.com/go-jose/go-jose/v4 v4.1.6 // indirect
 	github.com/go-json-experiment/json v0.0.0-20260213210345-44df1a37e875 // indirect
 	github.com/go-logr/logr v1.4.4 // indirect
