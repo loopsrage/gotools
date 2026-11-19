@@ -14,12 +14,13 @@ type MLToolsProvider struct {
 	rec *visionembed.SequenceRecognizer
 }
 
-// NewMLToolsProvider constructs the built-in go_mltools SDF-OCR + BeamSearch provider.
+// NewMLToolsProvider constructs the built-in go_mltools UnifiedCompositeOCR provider.
 func NewMLToolsProvider(cfg MLToolsProviderConfig) (*MLToolsProvider, error) {
 	rec, err := visionembed.NewSequenceRecognizer(visionembed.SequenceConfig{
 		NumClasses: cfg.NumClasses,
 		BeamSize:   cfg.BeamSize,
 		Seed:       cfg.Seed,
+		HeadType:   cfg.HeadType,
 	})
 	if err != nil {
 		return nil, err

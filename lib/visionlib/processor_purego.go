@@ -50,9 +50,10 @@ func (p *pureGoProcessor) SegmentRegions(pngBytes []byte, minArea, maxArea int) 
 		return nil, nil, errors.New("visionlib: empty image dimensions")
 	}
 
-	gray := toGrayGrid(img)
+	gray := despeckleGrayImpulses(toGrayGrid(img), w, h)
 	blurred := gaussianBlur5x5(gray, w, h)
-	fgMask := adaptiveForegroundMask(blurred, w, h, maxInt(15, minInt(w, h)/12|1), 10)
+	fgMask := adaptiveForegroundMask(blurred, w, h, maxInt(31, minInt(w, h)/6|1), 14)
+	fgMask = despeckleIsolatedPixels(fgMask, w, h)
 	bridged := morphDilateRect(fgMask, w, h, maxInt(6, w/60), maxInt(2, h/120))
 
 	rawBoxes := connectedComponentBoxes(bridged, w, h)
@@ -125,9 +126,10 @@ func (p *pureGoProcessor) CropAndDenoise(pngBytes []byte, box image.Rectangle, p
 		return cropRawPNG, denPNG, err
 
 	default:
-		smoothed := gaussianBlur3x3(gray, cw, ch)
-		win := maxInt(15, minInt(cw, ch)/8|1)
-		fg := adaptiveForegroundMask(smoothed, cw, ch, win, 10)
+		despeckled := despeckleGrayImpulses(gray, cw, ch)
+		smoothed := gaussianBlur3x3(despeckled, cw, ch)
+		win := maxInt(35, minInt(cw, ch)/3|1)
+		fg := adaptiveForegroundMask(smoothed, cw, ch, win, 12)
 		cleaned := despeckleIsolatedPixels(fg, cw, ch)
 		outImg := maskToPaddedGrayImage(cleaned, cw, ch, 8)
 		denPNG, err := EncodePNG(outImg)
@@ -453,4 +455,45 @@ func maxInt(a, b int) int {
 		return a
 	}
 	return b
+}
+
+// despeckleGrayImpulses clears isolated 1-2px dark scanner speckles prior to Gaussian smoothing
+// while preserving connected 1px+ character strokes.
+func despeckleGrayImpulses(gray []uint8, w, h int) []uint8 {
+	if len(gray) != w*h || w < 3 || h < 3 {
+		return gray
+	}
+	out := make([]uint8, len(gray))
+	copy(out, gray)
+	for y := 0; y < h; y++ {
+		for x := 0; x < w; x++ {
+			idx := y*w + x
+			if gray[idx] >= 210 {
+				continue
+			}
+			darkNeighbors := 0
+			for dy := -1; dy <= 1; dy++ {
+				yy := y + dy
+				if yy < 0 || yy >= h {
+					continue
+				}
+				for dx := -1; dx <= 1; dx++ {
+					if dx == 0 && dy == 0 {
+						continue
+					}
+					xx := x + dx
+					if xx < 0 || xx >= w {
+						continue
+					}
+					if gray[yy*w+xx] < 210 {
+						darkNeighbors++
+					}
+				}
+			}
+			if darkNeighbors <= 1 {
+				out[idx] = 255
+			}
+		}
+	}
+	return out
 }

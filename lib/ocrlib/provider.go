@@ -15,7 +15,10 @@ import (
 	"github.com/loopsrage/gotools/lib/index"
 )
 
-const providersBucket = "ocr_providers"
+const (
+	providersBucket              = "ocr_providers"
+	visionembedHeadUnifiedMaster = "unified_master_head"
+)
 
 // TesseractProviderConfig configures the Tesseract OCR provider.
 type TesseractProviderConfig struct {
@@ -44,12 +47,13 @@ type OllamaProviderConfig struct {
 	Prompt         string `json:"Prompt" yaml:"Prompt"`
 }
 
-// MLToolsProviderConfig configures the go_mltools native neural SDF-OCR + BeamSearch provider.
+// MLToolsProviderConfig configures the go_mltools native neural UnifiedCompositeOCR provider.
 type MLToolsProviderConfig struct {
-	Enabled    bool  `json:"Enabled" yaml:"Enabled"`
-	NumClasses int   `json:"NumClasses" yaml:"NumClasses"`
-	BeamSize   int   `json:"BeamSize" yaml:"BeamSize"`
-	Seed       int64 `json:"Seed" yaml:"Seed"`
+	Enabled    bool   `json:"Enabled" yaml:"Enabled"`
+	NumClasses int    `json:"NumClasses" yaml:"NumClasses"`
+	BeamSize   int    `json:"BeamSize" yaml:"BeamSize"`
+	Seed       int64  `json:"Seed" yaml:"Seed"`
+	HeadType   string `json:"HeadType" yaml:"HeadType"`
 }
 
 // Config holds all swappable OCR provider configurations.
@@ -84,6 +88,7 @@ func DefaultConfig() Config {
 			NumClasses: 95,
 			BeamSize:   4,
 			Seed:       42,
+			HeadType:   visionembedHeadUnifiedMaster,
 		},
 	}
 }
