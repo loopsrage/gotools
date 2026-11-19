@@ -23,7 +23,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.13.0
 	github.com/klippa-app/go-pdfium v1.21.5
-	github.com/loopsrage/go_mltools v0.0.0-20261119222231-be29c4924c46
+	github.com/loopsrage/go_mltools v0.0.0-20261119223828-2437558ccbac
 	github.com/microsoft/go-mssqldb v1.12.0
 	github.com/ollama/ollama v0.40.16
 	github.com/openai/openai-go/v3 v3.2.0
