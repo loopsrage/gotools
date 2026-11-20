@@ -99,6 +99,7 @@ type RecognizeRequest struct {
 	PageIndex   int             `json:"page_index"`
 	RegionIndex int             `json:"region_index"`
 	ImagePNG    []byte          `json:"-"`
+	RawImagePNG []byte          `json:"-"`
 	Bounds      image.Rectangle `json:"bounds"`
 	Language    string          `json:"language,omitempty"`
 	Params      map[string]any  `json:"params,omitempty"`

@@ -42,10 +42,14 @@ func (m *MLToolsProvider) ModelID() string { return m.rec.ModelID() }
 func (m *MLToolsProvider) Close() error    { return nil }
 
 func (m *MLToolsProvider) Recognize(_ context.Context, req RecognizeRequest) (*RecognizeResult, error) {
-	if len(req.ImagePNG) == 0 {
+	imgPNG := req.ImagePNG
+	if len(req.RawImagePNG) > 0 && visionembed.IsCleanRenderPNG(req.RawImagePNG) {
+		imgPNG = req.RawImagePNG
+	}
+	if len(imgPNG) == 0 {
 		return nil, errors.New("ocrlib(mltools): empty ImagePNG")
 	}
-	res, err := m.rec.RecognizePNG(req.ImagePNG)
+	res, err := m.rec.RecognizePNG(imgPNG)
 	if err != nil {
 		return nil, err
 	}

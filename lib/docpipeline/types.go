@@ -11,7 +11,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/loopsrage/go_mltools/ppsclient"
+	"github.com/loopsrage/go_mltools/proceduralphasespace/ppsclient"
 	"github.com/loopsrage/gotools/lib/auditlib"
 	"github.com/loopsrage/gotools/lib/ocrlib"
 	"github.com/loopsrage/gotools/lib/visionlib"
@@ -284,6 +284,7 @@ type ocrTask struct {
 	regionIndex  int
 	bounds       image.Rectangle
 	denoisedPNG  []byte
+	rawPNG       []byte
 	providerName string
 }
 

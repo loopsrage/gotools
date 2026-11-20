@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/loopsrage/go_mltools/ppsclient"
+	"github.com/loopsrage/go_mltools/proceduralphasespace/ppsclient"
 	"github.com/loopsrage/gotools/lib/docpipeline"
 	"github.com/loopsrage/gotools/lib/gziplib"
 	"github.com/loopsrage/gotools/lib/visionlib"

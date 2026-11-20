@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/loopsrage/go_mltools/polyphonic/abacus"
-	"github.com/loopsrage/go_mltools/ppsclient"
+	"github.com/loopsrage/go_mltools/proceduralphasespace/ppsclient"
 	"github.com/loopsrage/go_mltools/visionembed"
 	"github.com/loopsrage/gotools/lib/fileslib"
 	"github.com/loopsrage/gotools/lib/indexQueue"
@@ -747,6 +747,7 @@ func (e *Engine) runDenoiseStage(_ *indexQueue.IndexQueue, qd *queueController.Q
 			regionIndex:  task.regionIndex,
 			bounds:       task.bounds,
 			denoisedPNG:  cropDenoisedPNG,
+			rawPNG:       cropRawPNG,
 			providerName: prov.Name(),
 		}); err != nil {
 			return err
@@ -777,6 +778,7 @@ func (e *Engine) runOCRStage(_ *indexQueue.IndexQueue, qd *queueController.Queue
 		PageIndex:   task.pageIndex,
 		RegionIndex: task.regionIndex,
 		ImagePNG:    task.denoisedPNG,
+		RawImagePNG: task.rawPNG,
 		Bounds:      task.bounds,
 		Language:    job.req.Language,
 	})

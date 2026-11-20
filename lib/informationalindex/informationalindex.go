@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/loopsrage/go_mltools/ppsclient"
+	"github.com/loopsrage/go_mltools/proceduralphasespace/ppsclient"
 	"github.com/loopsrage/go_mltools/proceduralphasespace"
 	"github.com/loopsrage/gotools/lib/fileslib"
 	"github.com/loopsrage/gotools/lib/idlib"
