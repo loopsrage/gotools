@@ -86,8 +86,7 @@ func TestEnginePDFAndDirectImagePipeline(t *testing.T) {
 		case "/v1/batch/logs":
 			_, _ = w.Write([]byte(`{"status":"ok"}`))
 		default:
-			w.WriteHeader(http.StatusOK)
-			_, _ = w.Write([]byte(`{"status":"ok"}`))
+			w.WriteHeader(http.StatusNotFound)
 		}
 	}))
 	defer ppsSrv.Close()
