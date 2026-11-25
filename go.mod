@@ -23,7 +23,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.13.0
 	github.com/klippa-app/go-pdfium v1.21.5
-	github.com/loopsrage/go_mltools v0.0.0-20261124234517-1880fd27c45a
+	github.com/loopsrage/go_mltools v0.0.0-20261125003425-93ce8e6c1f96
 	github.com/microsoft/go-mssqldb v1.12.0
 	github.com/ollama/ollama v0.40.16
 	github.com/openai/openai-go/v3 v3.2.0
@@ -102,7 +102,7 @@ require (
 	github.com/klauspost/compress v1.20.3 // indirect
 	github.com/klauspost/cpuid/v2 v2.4.1 // indirect
 	github.com/kylelemons/godebug v1.1.0 // indirect
-	github.com/loopsrage/go_torch v0.0.0-20261124225538-ef2b8f25f70e // indirect
+	github.com/loopsrage/go_torch v0.0.0-20261124235520-2a4dbffa292f // indirect
 	github.com/loopsrage/tensor v0.0.0-20261124224756-7fcd0ef9ee47 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
